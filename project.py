@@ -20,11 +20,11 @@ reg1 = LinearRegression()
 reg1.fit(X_red, y_red)
 y_red_pred = reg1.predict(X_red)
 tr_error_red = mean_squared_error(y_red, y_red_pred)
-print("Accuracy of red: ", tr_error_red)
+print("RMS error in red: ", tr_error_red)
 
 # White wine
 reg2 = LinearRegression()
 reg2.fit(X_white, y_white)
 y_white_pred = reg2.predict(X_white)
 tr_error_white = mean_squared_error(y_white, y_white_pred)
-print("Accuracy of white: ", tr_error_white)
+print("RMS error in white: ", tr_error_white)
