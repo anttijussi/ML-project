@@ -65,10 +65,10 @@ plt.figure(figsize=(8, 6))
 plt.scatter(y_white_val, y_white_pred, alpha=0.5, color='red', label='Predictions')
 
 # Target predictions
-plt.plot([3, 8], [3, 8], color='black', linestyle='--', label='Ideal predictions')
+plt.plot([3, 9], [3, 9], color='black', linestyle='--', label='Ideal predictions')
 
 plt.title('Predicted vs actual quality of white wines')
-plt.xlabel('Actual quality (validation data))')
+plt.xlabel('Actual quality (validation data)')
 plt.ylabel('Predicted quality')
 plt.legend()
 plt.grid(True, linestyle=':', alpha=0.7)
@@ -85,7 +85,7 @@ plt.scatter(y_red_val, y_red_pred, alpha=0.5, color='red', label='Predictions')
 plt.plot([3, 8], [3, 8], color='black', linestyle='--', label='Ideal predictions')
 
 plt.title('Predicted vs actual quality of red wines')
-plt.xlabel('Actual quality (validation data))')
+plt.xlabel('Actual quality (validation data)')
 plt.ylabel('Predicted quality')
 plt.legend()
 plt.grid(True, linestyle=':', alpha=0.7)
