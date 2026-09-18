@@ -4,6 +4,7 @@ import sklearn as scikit_learn
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
 
 datared = pd.read_csv('wine+quality/winequality-red.csv', sep=';')
 datawhite = pd.read_csv('wine+quality/winequality-white.csv', sep=';')
@@ -14,17 +15,24 @@ y_white = datawhite["quality"]
 X_red = datared.drop(columns = "quality")
 X_white = datawhite.drop(columns = "quality")
 
+X_red_train, X_red_left, y_red_train, y_red_left = train_test_split(X_red, y_red, test_size=0.3, random_state=42)
+X_red_val, X_red_test, y_red_val, y_red_test = train_test_split(X_red_left, y_red_left, test_size=0.5, random_state=42)
+
+X_white_train, X_white_left, y_white_train, y_white_left = train_test_split(X_white, y_white, test_size=0.3, random_state=42)
+X_white_val, X_white_test, y_white_val, y_white_test = train_test_split(X_white_left, y_white_left, test_size=0.5, random_state=42)
 
 # Red wine
 reg1 = LinearRegression()
-reg1.fit(X_red, y_red)
-y_red_pred = reg1.predict(X_red)
-tr_error_red = mean_squared_error(y_red, y_red_pred)
-print("RMS error in red: ", tr_error_red)
+reg1.fit(X_red_train, y_red_train)
+y_red_pred = reg1.predict(X_red_val)
+tr_error_red = mean_squared_error(y_red_val, y_red_pred)
+rms_red = np.sqrt(tr_error_red)
+print("MS error in red: ", rms_red)
 
 # White wine
 reg2 = LinearRegression()
-reg2.fit(X_white, y_white)
-y_white_pred = reg2.predict(X_white)
-tr_error_white = mean_squared_error(y_white, y_white_pred)
-print("RMS error in white: ", tr_error_white)
+reg2.fit(X_white_train, y_white_train)
+y_white_pred = reg2.predict(X_white_val)
+tr_error_white = mean_squared_error(y_white_val, y_white_pred)
+rms_white = np.sqrt(tr_error_white)
+print("MS error in white: ", rms_white)
