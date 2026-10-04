@@ -16,6 +16,10 @@ from sklearn.ensemble import RandomForestRegressor
 datared = pd.read_csv('wine+quality/winequality-red.csv', sep=';')
 datawhite = pd.read_csv('wine+quality/winequality-white.csv', sep=';')
 
+# Amount of data points/labels
+print("Amount of red wine data points:", datared["quality"].count())
+print("Amount of white wine data points:", datawhite["quality"].count())
+
 # Combining the two dataframes and creating a new binary feature for the color
 datared["is_red"] = 1
 datawhite["is_red"] = 0
@@ -24,6 +28,11 @@ newdata = pd.concat([datared, datawhite], ignore_index=True)
 # Fetchinq the desired features and labels
 y = newdata["quality"]
 X = newdata.drop(columns = ["quality", "density", "total sulfur dioxide", "citric acid"])
+
+# Min, max, and mean of labels
+print("Min and max ratings:", y.min(), y.max())
+print("Mean rating:", y.mean())
+print("\n")
 
 # Splitting the data into training, validation and testing data
 X_train, X_left, y_train, y_left = train_test_split(X, y, test_size=0.3, random_state=42)
@@ -70,7 +79,6 @@ plt.legend()
 plt.grid(True, linestyle=':', alpha=0.7)
 
 plt.show()
-
 
 
 # Random forest visualisation
