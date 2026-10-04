@@ -43,25 +43,13 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_val_scaled = scaler.transform(X_val)
 
+
 # Applying linear regression
 reg = LinearRegression()
 reg.fit(X_train_scaled, y_train)
 y_pred_reg = reg.predict(X_val_scaled)
 rms_reg = np.sqrt(mean_squared_error(y_val, y_pred_reg))
 print("RMS error with linear regression: ", rms_reg)
-
-# Applying random forest
-forest = RandomForestRegressor(random_state=42)
-forest.fit(X_train_scaled, y_train)
-y_pred_forest = forest.predict(X_val_scaled)
-rms_forest = np.sqrt(mean_squared_error(y_val, y_pred_forest))
-print("RMS error with random forest: ", rms_forest)
-
-# Seemingly random forest is the more accurate model. Let us calculate the final RMS with the testing data
-X_test_scaled = scaler.transform(X_test)
-y_pred_forest_final = forest.predict(X_test_scaled)
-rms_forest_final = np.sqrt(mean_squared_error(y_test, y_pred_forest_final))
-print("RMS error for random forest with testing data: ", rms_forest_final)
 
 # Linear regression visualisation
 plt.figure(figsize=(8, 6))
@@ -81,6 +69,13 @@ plt.grid(True, linestyle=':', alpha=0.7)
 plt.show()
 
 
+# Applying random forest
+forest = RandomForestRegressor(random_state=42)
+forest.fit(X_train_scaled, y_train)
+y_pred_forest = forest.predict(X_val_scaled)
+rms_forest = np.sqrt(mean_squared_error(y_val, y_pred_forest))
+print("RMS error with random forest: ", rms_forest)
+
 # Random forest visualisation
 plt.figure(figsize=(8, 6))
 
@@ -92,6 +87,30 @@ plt.plot([3, 8], [3, 8], color='black', linestyle='--', label='Ideal predictions
 
 plt.title('Predicted vs actual quality - Random Forest')
 plt.xlabel('Actual quality (validation data)')
+plt.ylabel('Predicted quality')
+plt.legend()
+plt.grid(True, linestyle=':', alpha=0.7)
+
+plt.show()
+
+
+# Final error using test set (for better model)
+X_test_scaled = scaler.transform(X_test)
+y_pred_forest_final = forest.predict(X_test_scaled)
+rms_forest_final = np.sqrt(mean_squared_error(y_test, y_pred_forest_final))
+print("\nRMS error for random forest with testing data: ", rms_forest_final)
+
+# Final visualization using test data and random forest model
+plt.figure(figsize=(8, 6))
+
+# Predictions as a scatter plot, now using the test set
+plt.scatter(y_test, y_pred_forest, alpha=0.5, color='red', label='Predictions')
+
+# Target predictions
+plt.plot([3, 8], [3, 8], color='black', linestyle='--', label='Ideal predictions')
+
+plt.title('Predicted vs actual quality - Random Forest')
+plt.xlabel('Actual quality (test data)')
 plt.ylabel('Predicted quality')
 plt.legend()
 plt.grid(True, linestyle=':', alpha=0.7)
