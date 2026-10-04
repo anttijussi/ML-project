@@ -63,8 +63,8 @@ plt.scatter(y_val, y_pred_reg, alpha=0.5, color='red', label='Predictions')
 # Target predictions
 plt.plot([3, 8], [3, 8], color='black', linestyle='--', label='Ideal predictions')
 
-plt.title('Predicted vs actual quality')
-plt.xlabel('Actual quality (validation data))')
+plt.title('Predicted vs actual quality - Linear Regression')
+plt.xlabel('Actual quality (validation data)')
 plt.ylabel('Predicted quality')
 plt.legend()
 plt.grid(True, linestyle=':', alpha=0.7)
@@ -82,8 +82,8 @@ plt.scatter(y_val, y_pred_forest, alpha=0.5, color='red', label='Predictions')
 # Target predictions
 plt.plot([3, 8], [3, 8], color='black', linestyle='--', label='Ideal predictions')
 
-plt.title('Predicted vs actual quality')
-plt.xlabel('Actual quality (validation data))')
+plt.title('Predicted vs actual quality - Random Forest')
+plt.xlabel('Actual quality (validation data)')
 plt.ylabel('Predicted quality')
 plt.legend()
 plt.grid(True, linestyle=':', alpha=0.7)
